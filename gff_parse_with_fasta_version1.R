@@ -1,8 +1,8 @@
 library(tidyverse) ## used for data manipulation 
 library(ape) ## used to import a gff file
-library(foreach)
+library(foreach) ##used for parsing fasta file in the end
 
-## read in gff file 
+## read in gff3 file (directly downloaded from GenBank)
 gff <- read.gff("sequence.gff3", na.strings = c(".", "?"), GFF3 = TRUE)
 
 ##select only necessary columns - source, start, and end
@@ -31,7 +31,7 @@ gff4 <- gff3 %>% filter(gff3$intergenic_region > 250 & gff3$intergenic_region < 
 
 write.csv(gff4, "filtered_gff_w_intergenic_info.csv")
 
-##use coordinates to parse fasta file 
+##read in fasta file as a string, directly downloaded from GenBank without the header
 
 fasta <- read_file("sequence.fasta")
 
